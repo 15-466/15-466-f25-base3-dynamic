@@ -2,6 +2,7 @@
 
 #include "Scene.hpp"
 #include "Sound.hpp"
+#include "DynamicMeshBuffer.hpp"
 
 #include <glm/glm.hpp>
 
@@ -27,6 +28,14 @@ struct PlayMode : Mode {
 
 	//local copy of the game scene (so code can change it during gameplay):
 	Scene scene;
+
+	//dynamic mesh data:
+	DynamicMeshBuffer wave;
+	//vao mapping wave data for lit_color_texture_program:
+	GLuint wave_for_lit_color_texture_program = 0;
+	//drawable (in scene) associated with the wave data:
+	Scene::Drawable *wave_drawable = nullptr;
+	float wave_acc = 0.0f;
 
 	//hexapod leg to wobble:
 	Scene::Transform *hip = nullptr;
